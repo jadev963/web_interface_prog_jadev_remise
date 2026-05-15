@@ -53,5 +53,44 @@ function loadUsers() {
         <button id="posts-btn-${user.id}">Load Posts</button>
         `;
         usersGrid.appendChild(card);
+        const postsBtn = document.getElementById(`posts-btn-${user.id}`);
+        postsBtn.addEventListener("click", () => loadPostsForUser(user, card));
     }
+
+    function loadPostsForUser(user, card) {
+      
+        setStatus("Loading posts ...");
+
+        fetch(POSTS_API)
+        .then((response) => {
+            if (!response.ok){
+                throw new Error(`HTTP Error : ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((posts) =>{
+            const userPosts = posts.filter((post) => post.userId === user.id);
+            const firstThree = userPosts.slice(0, 3);
+            renderPosts(firstThree, card);
+            setStatus("posts loaded successfully!");
+        })
+        .catch((error) => {
+            setStatus(`failes to load posts: ${error.message}`);
+        });
+    }
+
+    function renderPosts(posts, card) {
+        
+        posts.forEach((post) => {
+            const postDiv = document.createElement("div");
+            postDiv.innerHTML = `
+            <h3>${post.title}</h3>
+            <p>${post.body}</p>
+            `;
+            card.appendChild(postDiv);
+        });
+
+    }
+
+    
 
