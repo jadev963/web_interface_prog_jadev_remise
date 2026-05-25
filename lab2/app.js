@@ -43,14 +43,19 @@ function loadUsers() {
     function renderUserCard(user) {
 
         const card = document.createElement("div");
+        card.className = "col";
+        card.innerHTML = "";
 
         card.innerHTML = `
-        <h2>${user.name}</h2>
-        <p>Email: ${user.name}</p>
-        <p>Phone: ${user.phone}</p>
-        <p>City: ${user.address.city}</p>
-        <p>Company: ${user.company.name}</p>
-        <button id="posts-btn-${user.id}">Load Posts</button>
+        <div class="card h-100 p-3">
+            <h2>${user.name}</h2>
+            <p>Email: ${user.name}</p>
+            <p>Phone: ${user.phone}</p>
+            <p>City: ${user.address.city}</p>
+            <p>Company: ${user.company.name}</p>
+            <button id="posts-btn-${user.id}">Load Posts</button>
+            div id="posts-${user.id}"></div>
+        </div>
         `;
         usersGrid.appendChild(card);
         const postsBtn = document.getElementById(`posts-btn-${user.id}`);
