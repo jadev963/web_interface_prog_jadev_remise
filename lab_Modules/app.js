@@ -1,24 +1,25 @@
 import { fetchUsers } from "./api.js";
-import { renderUsers } from "./ui.js";
+import { renderUsers, clearUsers } from "./ui.js";
+import { setStatus } from "./status.js";
 
 const loadUsersBtn = document.getElementById("load-users-btn");
-const status = document.getElementById("status");
+const statusEl = document.getElementById("status");
 const usersContainer = document.getElementById("users-container");
+const clearBtn = document.getElementById("clear-btn");
 
 loadUsersBtn.addEventListener("click", () => {
-  status.textContent = "Loading users...";
-
+  setStatus(statusEl, "Loading users...");
   fetchUsers()
     .then((users) => {
       renderUsers(users, usersContainer);
-      status.textContent = "Users loaded successfully.";
+      setStatus(statusEl, "Users loaded successfully.");
     })
     .catch((error) => {
-      status.textContent = `Failed to load users: ${error.message}`;
+      setStatus(statusEl, `Failed to load users: ${error.message}`);
     });
 });
 
-clearBtn.addEventListener("click", ()=> {
-    clearUsers(usersContainer);
-    status.textContent = "Users cleared.";
+clearBtn.addEventListener("click", () => {
+  clearUsers(usersContainer);
+  setStatus(statusEl, "Users cleared.");
 });
