@@ -11,13 +11,17 @@ const detailsContainer = document.getElementById("details-container");
 
 
 loadBtn.addEventListener("click", async () => {
-    console.log("clicked");
-    status.textContent = "Loading temas ...";
-    const data = await fetchTeams();
-    const teams = data.map(obj => Team.fromObject(obj));
-    console.log(teams)
-    renderTeams(teams, teamsContainer);
-    status.textContent = "Teams Loaded successfully.";
+    status.textContent = "Loading teams ...";
+    try {
+        const data = await fetchTeams();
+        const teams = data.map(obj => Team.fromObject(obj));
+        console.log(teams)
+        renderTeams(teams, teamsContainer);
+        status.textContent = "Teams Loaded successfully.";
+    }catch (error) {
+        status.textContent = "Failed to load teams.";
+        
+    }
 });
 
 clearBtn.addEventListener("click", () => {
