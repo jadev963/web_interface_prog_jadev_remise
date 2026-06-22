@@ -10,6 +10,8 @@ function renderTeams(teams, container){
         card.setAttribute("goal-difference", team.goalDifference);
         container.appendChild(card);
     });
+    console.log("rendering")
+    console.log(container)
 }
 
 export { renderTeams };

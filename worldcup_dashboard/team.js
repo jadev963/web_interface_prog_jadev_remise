@@ -1,7 +1,7 @@
 class Team {           
     constructor( id, name, group, points, played, goalDifference) { 
-        this.name = name; 
         this.id = id;
+        this.name = name; 
         this.group = group;
         this.points = points;
         this.played = played;
@@ -25,6 +25,8 @@ class Team {
         }
 
         static fromObject(data){
-            return new Team(data.id, data.name, data.group, data.played, data.goalDifference)
+            return new Team(data.id, data.name, data.group,data.points, data.played, data.goalDifference)
         }
 }
+
+export { Team };

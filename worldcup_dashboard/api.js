@@ -5,6 +5,7 @@ async function fetchTeams() {
         throw new Error("Failed to fecth teams");
     }
     const data = await response.json();
+    console.log(data);
 
     return data
 
