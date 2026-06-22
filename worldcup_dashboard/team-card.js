@@ -20,6 +20,21 @@ class TeamCard extends HTMLElement {
     }
 
     render() {
+        if (Number(this.getPoints()) >= 5){
+           this.shadowRoot.innerHTML = `
+            <style>
+                div{ border: 2px solid #27b76f; padding: 30px; margin: 5px; border-radius: 5px }
+                button {margin-top:8px; cursor: pointer; }
+            </style>
+            <div>
+                <h3>${this.getName()}</h3>
+                <p>Group: ${this.getGroup()}</p>
+                <p>Points: ${this.getPoints()}</p>
+                <button id="view-btn">ViewDetails</button>
+            </div>
+        `; 
+        }else{
+
         this.shadowRoot.innerHTML = `
             <style>
                 div{ border: 1px solid #ccc; padding: 10px; margin: 5px; border-radius: 5px }
@@ -32,7 +47,7 @@ class TeamCard extends HTMLElement {
                 <button id="view-btn">ViewDetails</button>
             </div>
         `;
-
+        }
         const btn = this.shadowRoot.querySelector("#view-btn");
         const self = this;
         btn.addEventListener("click", () => {
