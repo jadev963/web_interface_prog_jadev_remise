@@ -32,6 +32,19 @@ class TeamCard extends HTMLElement {
                 <button id="view-btn">ViewDetails</button>
             </div>
         `;
+
+        const btn = this.shadowRoot.querySelector("#view-btn");
+        const self = this;
+        btn.addEventListener("click", () => {
+            const details = document.getElementById("details-container");
+            details.innerHTML = `
+                <p>Name: ${this.getAttribute("name")}</p>
+                <p>Group: ${this.getAttribute("group")}</p>
+                <p>Points: ${this.getAttribute("points")}</p>
+                <p>Played: ${this.getAttribute("played")}</p>
+                <p>Goal Difference: ${this.getAttribute("goal-difference")}</p>
+            `;
+        });
     }
 }
 
